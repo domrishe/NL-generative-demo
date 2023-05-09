@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='icon.png') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300;400&family=Roboto+Mono&display=swap" rel="stylesheet">    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+    <script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Stable Diffusion App</title>
+</head>
+<style>
+body {
+    font-family: 'Roboto Mono', cursive;
+    margin: 0;
+    padding: 0;
+    background-color: #D0CEC1;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+
+
+}
+
+.prompt-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: min-content;
+    font-size: large;
+
+}
+
+
+
+label {
+    width: max-content;
+    padding: 10px;
+    font-family: 'Roboto Mono', monospace;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    width: 500px;
+}
+
+button {
+    padding: 20px;
+    margin: 10px;
+    border: none;
+    font-family: 'Londrina Solid', cursive;
+    border-radius: 12px;
+    font-size: 36px;
+    transition-duration: 0.4s;
+    background-color: #FEEA73;
+
+}
+
+button:hover {
+    transform:rotate(4deg);
+    cursor: pointer;
+    background-color: #B4ABFF;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+}
+
+footer p {
+    text-align: center;
+    font-size: small;
+}
+
+.banner {
+    background: #D0CEC1;
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+
+}
+
+.sketchfab-embed-wrapper {
+    margin: 0 auto;
+    padding: 15px;
+    width: min-content;
+    margin-bottom: 10px;
+    background-color: white;
+    outline: #dbdad4 solid 2px;
+    outline-offset: -7px;
+}
+
+.sketch {
+    width: min-content;
+    height: auto;
+
+    /* padding: 10px; */
+    margin: 0 auto;
+}
+
+.blurb {
+    font-size: small;
+    width: 75%;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1rem;
+    padding-bottom: 10px;
+}
+
+.sketch-wrapper {
+    width: 550px;
+    margin: 0 auto 10px;
+    padding: 15px;
+    background-color: white;
+    outline: #dbdad4 solid 2px;
+    outline-offset: -7px;
+}
+
+.sketch-wrapper p {
+    margin: 0;
+    padding: 7px 0 0 3px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.sketch-wrapper p a {
+    color: #1CAAD9;
+}
+
+.gh {
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+
+</style>
+
+<body>
+    <div class="banner">
+  <h1>Durian</h1>
+  <h2>Plantae // Malvaceae // Helicteroideae // Durioneae // Durio</h2>
+  <div class="blurb"><p>Named in some regions as the "king of fruits",[4][5] the durian is distinctive for its large size, strong odour, and thorn-covered rind. The fruit can grow as large as 30 centimetres (12 inches) long and 15 cm (6 in) in diameter, and it typically weighs 1 to 3 kilograms (2 to 7 pounds). Its shape ranges from oblong to round, the colour of its husk green to brown, and its flesh pale yellow to red, depending on the species.</p></div>
+
+</div>
+<div class="sketchfab-embed-wrapper"> <iframe title="Durian Fruit Skin" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="550" height="300" src="https://sketchfab.com/models/f7980513e06549d98a42a35936bb722a/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/durian-fruit-skin-f7980513e06549d98a42a35936bb722a?utm_medium=embed&utm_campaign=share-popup&utm_content=f7980513e06549d98a42a35936bb722a" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Durian Fruit Skin </a> by <a href="https://sketchfab.com/RISDNaturelab?utm_medium=embed&utm_campaign=share-popup&utm_content=f7980513e06549d98a42a35936bb722a" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> RISD Nature Lab </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=f7980513e06549d98a42a35936bb722a" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
+
+<div class="sketch-wrapper">
+<div class="sketch" id="sketch">
+<script src="sketch.js"></script>
+</div>
+<p class="sketch-label">Parametric Durian in P5.js  /  <a href="#">Demo</a>  /  <a href="#">Github</a></p>
+</div>
+
+<div class="sketch-wrapper">
+    <img src="../Durian.gif" class="gh">
+    <p class="sketch-label">Parametric Durian in Rhino & Grasshopper  /  <a href="#">Github</a></p>
+</div>
+
+</div>
+</body>
+</html>

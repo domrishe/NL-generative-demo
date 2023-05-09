@@ -1,0 +1,35 @@
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+  canvas {
+    display: block;
+  }
+  
+  .sliders {
+    width: 200px;
+      -webkit-appearance: none;
+    
+  }
+  
+  .sliders::-webkit-slider-runnable-track {
+    background: #E08C8C;
+    height: 3px;
+    -webkit-appearance: none;
+  }
+  
+  .sliders::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    background: #FFCC34;
+    cursor: pointer;
+    -webkit-appearance: none;
+    
+    /* negative top padding moves it up */
+    margin-top: -6px;
+  
+    
+    /* Border radius gives rounded corners, if they're big enough, you end up with circles */
+    border-radius: 8px;
+    
+  }
