@@ -16,10 +16,13 @@ function setup() {
   randomDistanceSlider = createSlider(0, 300, 100, 1);
   randomDistanceSlider.position(cnv.position().x, cnv.position().y);
   randomDistanceSlider.addClass("sliders");
+  randomDistanceSlider.parent('sketch');
 
   numPointsSlider = createSlider(0, 100, 20, 1);
   numPointsSlider.position(cnv.position().x, cnv.position().y + 30);
   numPointsSlider.addClass("sliders");
+  randomDistanceSlider.parent('sketch');
+
 }
 
 function draw() {
@@ -134,6 +137,11 @@ function circumcenter(a, b, c) {
   const Ux = ((a.x * a.x + a.y * a.y) * (b.y - c.y) + (b.x * b.x + b.y * b.y) * (c.y - a.y) + (c.x * c.x + c.y * c.y) * (a.y - b.y)) / D;
   const Uy = ((a.x * a.x + a.y * a.y) * (c.x - b.x) + (b.x * b.x + b.y * b.y) * (a.x - c.x) + (c.x * c.x + c.y * c.y) * (b.x - a.x)) / D;
   return createVector(Ux, Uy);
+}
+
+function windowResized() {
+  randomDistanceSlider.position(cnv.position().x, cnv.position().y);
+  numPointsSlider.position(cnv.position().x, cnv.position().y + 30);
 }
 
 
